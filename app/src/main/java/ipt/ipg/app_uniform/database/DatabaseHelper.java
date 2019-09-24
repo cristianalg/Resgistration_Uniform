@@ -91,4 +91,82 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
 
+    public static Cursor login(SQLiteDatabase db, String email, String password) {
+        return db.query("ACCOUNT", new String[]{"_id", "EMAIL", "PASSWORD", "ACCOUNT_CLIENT"},
+                "EMAIL = ? AND PASSWORD = ? ", new String[]{email, password},
+                null, null, null, null);
+    }
+
+    public static void deleteAccount(SQLiteDatabase db, String clientID) {
+        db.delete("CLIENT", "_id = ? ", new String[]{clientID});
+        db.delete("ACCOUNT", "_id = ? ", new String[]{clientID});
+
+    }
+
+    public static void updateClientImage(SQLiteDatabase db, byte[] image, String id) {
+        ContentValues employeeValues = new ContentValues();
+        employeeValues.put("IMAGE", image);
+        db.update("CLIENT", employeeValues, " _id = ? ", new String[]{id});
+    }
+
+    public static void updatePassword(SQLiteDatabase db, String password, String id) {
+        ContentValues clientValues = new ContentValues();
+        clientValues.put("PASSWORD", password);
+        db.update("ACCOUNT", clientValues, " _id = ? ", new String[]{id});
+    }
+
+    public static Cursor selectImage(SQLiteDatabase db, int clientID) {
+        return db.query("CLIENT", new String[]{"IMAGE"}, "_id = ? ",
+                new String[]{Integer.toString(clientID)}, null, null,
+                null, null);
+    }
+
+
+    public static Cursor selectClientPassword(SQLiteDatabase db, int clientID) {
+        return db.query("ACCOUNT", new String[]{"PASSWORD"}, "_id = ? ",
+                new String[]{Integer.toString(clientID)}, null, null,
+                null, null);
+    }
+
+    public static void updateClient(SQLiteDatabase db, String firstName, String lastName, int clientID) {
+        ContentValues clientValues = new ContentValues();
+        clientValues.put("FIRSTNAME", HelperUtilities.capitalize(firstName.toLowerCase()));
+        clientValues.put("LASTNAME", HelperUtilities.capitalize(lastName.toLowerCase()));
+        db.update("CLIENT", clientValues, "_id = ?", new String[]{String.valueOf(clientID)});
+    }
+
+    public static void updateAccount(SQLiteDatabase db, String email, int clientID) {
+        ContentValues accountValues = new ContentValues();
+        accountValues.put("EMAIL", email);
+        db.update("ACCOUNT", accountValues, " ACCOUNT_CLIENT = ?",
+                new String[]{String.valueOf(clientID)});
+    }
+
+    public static Cursor selectClientID(SQLiteDatabase db, String firstName, String lastName) {
+        return db.query("CLIENT", new String[]{"_id"},
+                "FIRSTNAME = ? AND LASTNAME = ?",
+                new String[]{firstName, lastName},
+                null, null, null, null);
+    }
+
+    public static Cursor selectClientJoinAccount(SQLiteDatabase db, int clientID) {
+        return db.rawQuery("SELECT FIRSTNAME, LASTNAME, EMAIL FROM CLIENT " +
+                "JOIN ACCOUNT " +
+                "ON CLIENT._id = ACCOUNT.ACCOUNT_CLIENT " +
+                "WHERE " +
+                "CLIENT._id = '" + clientID + "'", null);
+    }
+
+    public static Cursor selectClient(SQLiteDatabase db, int clientID) {
+        return db.query("CLIENT", null, " _id = ? ",
+                new String[]{String.valueOf(clientID)}, null, null, null, null);
+    }
+
+
+
+    public static Cursor selectAccount(SQLiteDatabase db, String email) {
+        return db.query("ACCOUNT", null, " EMAIL = ? ",
+                new String[]{email}, null, null, null, null);
+    }
+
 }
