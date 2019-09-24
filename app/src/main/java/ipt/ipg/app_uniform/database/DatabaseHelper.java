@@ -16,13 +16,36 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String DB_NAME = "Uniform";
     private static final int DB_VERSION = 1;
 
+    /** Tag for the log messages */
+    public static final String LOG_TAG = DatabaseHelper.class.getSimpleName();
+
+    /**
+     * Constructs a new instance of {@link DatabaseHelper}.
+     *
+     * @param context of the app
+     */
     public DatabaseHelper(Context context) {
         super(context, DB_NAME, null, DB_VERSION);
     }
 
+    /**
+     * This method is called when the database is created for the first time.
+     */
     @Override
-    public void onCreate(SQLiteDatabase db) {
+    public void onCreate(SQLiteDatabase db)
+    {
         updateDatabase(db, 0, DB_VERSION);
+        // Create a String that contains the SQL statement to create the product table
+        String SQL_CREATE_PRODUCTS_TABLE =  "CREATE TABLE " + ProductContract.ProductEntry.TABLE_NAME + " ("
+                + ProductContract.ProductEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+                + ProductContract.ProductEntry.COLUMN_PRODUCT_NAME + " TEXT NOT NULL, "
+                + ProductContract.ProductEntry.COLUMN_PRODUCT_QUANTITY + " INTEGER NOT NULL DEFAULT 0, "
+                + ProductContract.ProductEntry.COLUMN_PRODUCT_IMAGE_PATH + " TEXT, "
+                + ProductContract.ProductEntry.COLUMN_PRODUCT_SUPPLIER_NAME + " TEXT NOT NULL, "
+                + ProductContract.ProductEntry.COLUMN_PRODUCT_SUPPLIER_EMAIL + " TEXT NOT NULL);";
+
+        // Execute the SQL statement
+        db.execSQL(SQL_CREATE_PRODUCTS_TABLE);
     }
 
     //requires API level 16 and above
@@ -35,7 +58,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
     }
 
-
+    /**
+     * This is called when the database needs to be upgraded.
+     */
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS " + "CLIENT");

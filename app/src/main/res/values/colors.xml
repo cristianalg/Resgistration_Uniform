@@ -9,4 +9,11 @@
     <color name="colorDanger">#F44336</color>
     <color name="colorDeepOrange">#E64A19</color>
     <color name="colorInverted">#ffffff</color>
+
+    <!-- Color the catalog -->
+    <color name="editorColorPrimary">#FF5722</color>
+    <color name="editorColorPrimaryDark">#E64A19</color>
+    <color name="colorLightDeepOrange">#FF5722</color>
+     <color name="colorPositiveStock">#4CAF50</color>
+    <color name="colorEmptyStock">#F44336</color>
 </resources>

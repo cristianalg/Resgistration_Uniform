@@ -1,3 +1,56 @@
 <resources>
-    <string name="app_name">App_Uniform</string>
+    <string name="app_name">Uniform Registration</string>
+
+    <!--String Login-->
+    <string name="title_activity_login">sign in</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="prompt_confirm_password">Confirm Password</string>
+    <string name="action_login">Login</string>
+    <string name="action_register">Register</string>
+    <string name="prompt_first_name">First Name</string>
+    <string name="prompt_last_name">Last Name</string>
+    <string name="add_an_image_for_the_uniform">Add an image for the uniform</string>
+
+    <!-- String Catalog -->
+    <string name="action_delete_all_entries">Delete All Uniforms</string>
+    <string name="action_save">Save</string>
+    <string name="action_delete">Delete</string>
+    <string name="image_product_description">Image of the uniform</string>
+    <string name="category_name">Name</string>
+    <string name="hint_product_name">Uniform Name</string>
+    <string name="category_supplier">Supplier</string>
+    <string name="hint_product_supplier_name">Supplier Name</string>
+    <string name="hint_product_supplier_email">Supplier Email</string>
+    <string name="category_stock">Quantity</string>
+    <string name="empty_view_title_text">Nothing in uniform&#8230;</string>
+    <string name="empty_view_subtitle_text">Get started by adding a new uniform</string>
+    <string name="editor_activity_title_new_product">Add a Uniform</string>
+    <string name="editor_activity_title_edit_product">Edit Uniform</string>
+    <string name="editor_product_requires_name">Uniform requires a name !</string>
+    <string name="editor_product_requires_supplier_name">Uniform requires a supplier name !</string>
+    <string name="editor_product_requires_supplier_email">Uniform requires a supplier\'s email address!</string>
+    <string name="editor_product_invalid_supplier_email">The supplier\'s email address is not valid!</string>
+    <string name="editor_product_requires_positive_stock_level">Uniform requires a positive quantity!</string>
+    <string name="editor_product_requires_image">Uniform requires an image !</string>
+    <string name="editor_insert_product_failed">Error with saving uniform</string>
+    <string name="editor_update_product_failed">Error with updating uniform</string>
+    <string name="catalog_sell_product_item_failed">Error with selling uniform\'s item</string>
+    <string name="catalog_sell_product_item_failed_stock_empty">Quantity for this uniform is empty !</string>
+    <string name="editor_delete_product_failed">Error with deleting uniform</string>
+    <string name="catalog_delete_all_products_failed">Error with deleting the uniforms</string>
+    <string name="editor_insert_product_successful">Uniform saved</string>
+    <string name="editor_update_product_successful">Uniform updated</string>
+    <string name="editor_delete_product_successful">Uniform deleted</string>
+    <string name="catalog_sell_product_item_successful">One unit has been delivered</string>
+    <string name="catalog_delete_all_products_successful">All Uniforms deleted</string>
+    <string name="catalog_products_table_is_empty">The Uniforms database is empty !</string>
+    <string name="unsaved_changes_dialog_msg">Discard your changes and quit editing?</string>
+    <string name="discard">Discard</string>
+    <string name="keep_editing">Keep Editing</string>
+    <string name="delete_dialog_msg">Delete this uniform?</string>
+    <string name="delete_all_products_dialog_msg">Delete all uniforms?</string>
+    <string name="delete">Delete</string>
+    <string name="cancel">Cancel</string>
+
 </resources>
