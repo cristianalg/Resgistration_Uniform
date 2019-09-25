@@ -52,5 +52,7 @@
     <string name="delete_all_products_dialog_msg">Delete all uniforms?</string>
     <string name="delete">Delete</string>
     <string name="cancel">Cancel</string>
+    <string name="stock_level_label">Quantity the uniforms:&#160;</string>
+
 
 </resources>

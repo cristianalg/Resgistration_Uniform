@@ -8,4 +8,8 @@
     <dimen name="product_image_margin">4dp</dimen>
     <!-- Margin around the transaction buttons (Order & Sell) -->
     <dimen name="transaction_button_margin">32dp</dimen>
+    <!-- Height of each list item -->
+    <dimen name="list_item_height">145dp</dimen>
+    <!-- List view margin -->
+    <dimen name="list_view_margin">8dp</dimen>
 </resources>

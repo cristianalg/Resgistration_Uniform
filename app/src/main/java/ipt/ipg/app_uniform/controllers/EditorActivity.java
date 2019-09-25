@@ -1,7 +1,6 @@
 package ipt.ipg.app_uniform.controllers;
 
 import android.Manifest;
-import android.app.LoaderManager;
 import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -14,6 +13,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -29,6 +29,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.app.NavUtils;
 import androidx.core.content.ContextCompat;
+import androidx.loader.app.LoaderManager;
 import androidx.loader.content.CursorLoader;
 import androidx.loader.content.Loader;
 
@@ -108,7 +109,7 @@ public abstract class EditorActivity extends AppCompatActivity implements Loader
             mOrderNowImageView.setVisibility(View.GONE);
         } else {
             setTitle(getString(R.string.editor_activity_title_edit_product));
-            getSupportLoaderManager().initLoader(EXISTING_PRODUCT_LOADER, null, (androidx.loader.app.LoaderManager.LoaderCallbacks<Object>) this);
+            getSupportLoaderManager().initLoader(EXISTING_PRODUCT_LOADER, null, this);
         }
 
         // Setup OnTouchListeners on all the input fields,
@@ -149,7 +150,6 @@ public abstract class EditorActivity extends AppCompatActivity implements Loader
         });
 
     }
-
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -242,7 +242,7 @@ public abstract class EditorActivity extends AppCompatActivity implements Loader
             return;
         }
 
-           // Check that the product has a valid quantity.
+        // Check that the product has a valid quantity.
         if (productQuantity > 0) {
             values.put(ProductContract.ProductEntry.COLUMN_PRODUCT_QUANTITY, productQuantity);
         }
@@ -357,7 +357,7 @@ public abstract class EditorActivity extends AppCompatActivity implements Loader
     }
 
     @Override
-    public android.content.Loader<Cursor> onCreateLoader(int id, Bundle args) {
+    public Loader<Cursor> onCreateLoader(int id, Bundle args) {
 
         String[] projection = {
                 ProductContract.ProductEntry._ID,
@@ -374,8 +374,6 @@ public abstract class EditorActivity extends AppCompatActivity implements Loader
                 null,                   // No selection arguments
                 null);                  // Default sort order
     }
-
-
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -398,10 +396,10 @@ public abstract class EditorActivity extends AppCompatActivity implements Loader
                     Manifest.permission.READ_EXTERNAL_STORAGE)
                     != PackageManager.PERMISSION_GRANTED) {
 
-                    ActivityCompat.requestPermissions(this,
-                            new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
-                            MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE);
-                }
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
+                        MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE);
+            }
 
             if (productImageURI != null) {
                 try {
@@ -487,15 +485,5 @@ public abstract class EditorActivity extends AppCompatActivity implements Loader
             }
         }
         finish();
-    }
-
-    /**
-     * Called when pointer capture is enabled or disabled for the current window.
-     *
-     * @param hasCapture True if the window has pointer capture.
-     */
-    @Override
-    public void onPointerCaptureChanged(boolean hasCapture) {
-
     }
 }

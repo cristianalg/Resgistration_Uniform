@@ -14,7 +14,6 @@ import android.widget.AdapterView;
 import android.widget.CursorAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -26,8 +25,8 @@ import androidx.loader.content.Loader;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import ipt.ipg.app_uniform.R;
-import ipt.ipg.app_uniform.controllers.LoginActivity;
 import ipt.ipg.app_uniform.database.ProductContract;
+
 
 public abstract class CatalogActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
 
@@ -37,6 +36,8 @@ public abstract class CatalogActivity extends AppCompatActivity implements Loade
     /** Unique identifier for the loader */
     private static final int PRODUCT_LOADER = 0;
 
+    /** Instance of CursorAdapter */
+    ProductCursorAdapter mCursorAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +61,10 @@ public abstract class CatalogActivity extends AppCompatActivity implements Loade
         View emptyView = findViewById(R.id.empty_view);
         productListView.setEmptyView(emptyView);
 
+        // Setup an Adapter to create a list item for each row of product data in the Cursor.
+        // There is not product data yet (until the loader finishes), so we pass in null for the Cursor.
+        mCursorAdapter = new ProductCursorAdapter(this, null);
+        productListView.setAdapter(mCursorAdapter);
 
         // Setup the item click listener
         productListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -129,7 +134,17 @@ public abstract class CatalogActivity extends AppCompatActivity implements Loade
                 null);                  // Default sort order
     }
 
+    @Override
+    public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
+        // Update (@Link ProductCursorAdapter) with the new cursor containing updated products data.
+        mCursorAdapter.swapCursor(data);
+    }
 
+    @Override
+    public void onLoaderReset(Loader<Cursor> loader) {
+        // Callback called when the data needs to be deleted.
+        mCursorAdapter.swapCursor(null);
+    }
 
     private void showDeleteConfirmationDialog() {
         // Create an AlertDialog.Builder and set the message, and click listeners,
