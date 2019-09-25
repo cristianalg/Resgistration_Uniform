@@ -93,30 +93,35 @@ public abstract class CatalogActivity extends AppCompatActivity implements Loade
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // User clicked on a menu option in the app bar overflow menu.
-        switch (item.getItemId()) {
-            // Respond to a click on the "Lougout" menu option.
-            case R.id.nav_logout:
-                getApplicationContext().getSharedPreferences(LoginActivity.MY_PREFERENCES, 0).edit().clear().commit();
-                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-                startActivity(intent);
-                finish();
+        int id = item.getItemId();
 
-                // Respond to a click on the "Delete all entries" menu option.
-            case R.id.action_delete_all_entries:
-                Cursor c = getContentResolver().query(ProductContract.ProductEntry.CONTENT_URI, null, null, null, null);
-                // If the products table is not empty, try to delete all its entries.
-                if(c.getCount() > 0) {
-                    // Pop up confirmation dialog for deletion.
-                    showDeleteConfirmationDialog();
-                }
-                // Otherwise, show a toast saying that the products table is empty.
-                else {
-                    Toast.makeText(this, getString(R.string.catalog_products_table_is_empty),
-                            Toast.LENGTH_SHORT).show(); }
-                c.close();
-                return true;
+        if (id == R.id.nav_security) {
+            Intent intent = new Intent(getApplicationContext(), SecurityActivity.class);
+            startActivity(intent);
+
+        }else if (id == R.id.action_delete_all_entries) {
+            Cursor c = getContentResolver().query(ProductContract.ProductEntry.CONTENT_URI, null, null, null, null);
+            // If the products table is not empty, try to delete all its entries.
+            if (c.getCount() > 0) {
+                // Pop up confirmation dialog for deletion.
+                showDeleteConfirmationDialog();
+            }
+            // Otherwise, show a toast saying that the products table is empty.
+            else {
+                Toast.makeText(this, getString(R.string.catalog_products_table_is_empty),
+                        Toast.LENGTH_SHORT).show();
+            }
+            c.close();
+
+        } else if (id == R.id.nav_logout) {
+
+            getApplicationContext().getSharedPreferences(LoginActivity.MY_PREFERENCES, 0).edit().clear().commit();
+            Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+            startActivity(intent);
+            finish();
+
         }
-        return super.onOptionsItemSelected(item);
+        return true;
     }
 
 

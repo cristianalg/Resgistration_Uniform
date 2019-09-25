@@ -8,9 +8,14 @@
         app:showAsAction="never" />
 
     <item
+        android:id="@+id/nav_security"
+        android:orderInCategory="101"
+        android:title="Security Settings"
+        app:showAsAction="never" />
+
+    <item
         android:id="@+id/nav_logout"
-        android:orderInCategory="105"
-        android:icon="@drawable/ic_assignment_return_black_24dp"
+        android:orderInCategory="102"
         android:title="Logout" />
 
 </menu>
