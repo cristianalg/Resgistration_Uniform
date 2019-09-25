@@ -149,6 +149,36 @@ public abstract class EditorActivity extends AppCompatActivity implements Loader
             }
         });
 
+        mOrderNowImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_SENDTO);
+                intent.setData(Uri.parse("mailto:")); // only email apps should handle this
+                intent.putExtra(Intent.EXTRA_EMAIL, new String[] {supplierEmail});
+                intent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.email_subject_prefix) + productName);
+                intent.putExtra(Intent.EXTRA_TEXT, createOrderEmailMessage());
+                if (intent.resolveActivity(getPackageManager()) != null) {
+                    startActivity(intent);
+                }
+            }
+        });
+
+    }
+
+    /**
+     * This method creates a summary for the order email.
+     */
+    public String createOrderEmailMessage() {
+
+        String orderEmailMessage = getString(R.string.order_email_starting_greeting) + supplierName;
+        orderEmailMessage += getString(R.string.order_email_comma);
+        orderEmailMessage += getString(R.string.order_email_jump_line);
+        orderEmailMessage += getString(R.string.order_email_current_stock_statement_part_one) + productName;
+        orderEmailMessage += getString(R.string.order_email_current_stock_statement_part_two) + productQuantity;
+        orderEmailMessage += getString(R.string.order_email_point);
+        orderEmailMessage += getString(R.string.order_email_jump_line);
+        orderEmailMessage += getString(R.string.order_email_request_end_greetings);
+        return orderEmailMessage;
     }
 
     @Override

@@ -54,5 +54,14 @@
     <string name="cancel">Cancel</string>
     <string name="stock_level_label">Quantity the uniforms:&#160;</string>
 
+    <!-- order email  -->
+    <string name="email_subject_prefix">New order for :&#160;</string>
+    <string name="order_email_starting_greeting">Dear&#160;</string>
+    <string name="order_email_current_stock_statement_part_one">The quantity of the product&#160;</string>
+    <string name="order_email_current_stock_statement_part_two">&#160;is :&#160;</string>
+    <string name="order_email_request_end_greetings">We would like to order new units of this product to increase our quantidade.\n\n Best regards,</string>
+    <string name="order_email_jump_line">\n\n</string>
+    <string name="order_email_comma">,</string>
+    <string name="order_email_point">.</string>
 
 </resources>
