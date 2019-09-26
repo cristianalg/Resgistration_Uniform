@@ -20,8 +20,8 @@
     <string name="category_name">Name</string>
     <string name="hint_product_name">Uniform Name</string>
     <string name="category_supplier">Supplier</string>
-    <string name="hint_product_supplier_name">Supplier Name</string>
-    <string name="hint_product_supplier_email">Supplier Email</string>
+    <string name="hint_product_supplier_name">Responsible Name</string>
+    <string name="hint_product_supplier_email">Email to request more quantities</string>
     <string name="category_stock">Quantity</string>
     <string name="empty_view_title_text">Nothing in uniform&#8230;</string>
     <string name="empty_view_subtitle_text">Get started by adding a new uniform</string>
